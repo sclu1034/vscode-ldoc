@@ -1,0 +1,3 @@
+= vscode-ldoc
+
+Syntax Highlighting for Lua LDoc template (`.ltp`) files.

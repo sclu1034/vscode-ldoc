@@ -1,0 +1,57 @@
+{
+    "comment": "LDoc Template",
+    "scopeName": "text.html.ldoc",
+    "foldingStartMarker": "(<(?i:(head|table|tr|div|style|script|ul|ol|form|dl))\\b.*?>|^\\s*#\\s+(for|if|then|while|do|function))",
+    "foldingStopMarker": "(<\/(?i:(head|table|tr|div|style|script|ul|ol|form|dl))\\b.*?>|^\\s*#\\s+(end))",
+    "injections": {
+        "text.html.ldoc - (meta.embedded.block.lua | meta.embedded.line.lua | meta.tag | meta.attribute | comment)": {
+            "patterns": [
+                {
+                    "match": "(^\\s*#\\s*)(.*?)($|\\n)",
+                    "name": "meta.embedded.line.ldoc",
+                    "captures": {
+                        "1": { "name": "punctuation.whitespace.comment.leading.ldoc" },
+                        "2": {
+                            "patterns": [{ "include": "source.lua" }]
+                        }
+                    }
+                },
+                {
+                    "include": "#interpolation"
+                }
+            ]
+        }
+    },
+    "patterns": [
+        {
+            "include": "text.html.basic"
+        }
+    ],
+    "repository": {
+        "interpolation": {
+            "patterns": [
+                {
+                    "begin": "\\$\\(",
+                    "beginCaptures": {
+                        "0": {
+                            "name": "punctuation.section.embedded.begin.ldoc"
+                        }
+                    },
+                    "contentName": "meta.embedded.block.lua",
+                    "end": "\\)",
+                    "endCaptures": {
+                        "0": {
+                            "name": "punctuation.section.embedded.end.ldoc"
+                        }
+                    },
+                    "name": "meta.embedded.block.ldoc",
+                    "patterns": [
+                        {
+                            "include": "source.lua"
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}

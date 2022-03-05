@@ -2,24 +2,47 @@
   "name": "vscode-ldoc",
 	"displayName": "vscode-ldoc",
 	"description": "VSCode extension for Lua LDoc",
-	"version": "0.0.1",
+	"version": "1.0.0",
+    "license": "GPL-3.0-or-later",
+    "author": {
+        "name": "Lucas Schwiderski",
+        "email": "lucas@lschwiderski.de",
+        "url": "https://github.com/sclu1034"
+    },
+    "publisher": "sclu1034",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/sclu1034/vscode-ldoc"
+    },
 	"engines": {
-		"vscode": "^1.65.0"
+		"vscode": "^1.64.0"
 	},
 	"categories": [
-		"Other"
+		"Programming Languages"
 	],
-	"activationEvents": [
-        "onCommand:vscode-ldoc.helloWorld"
-	],
+    "tags": ["lua"],
+	"activationEvents": [],
 	"main": "./out/extension.js",
 	"contributes": {
-		"commands": [
-			{
-				"command": "vscode-ldoc.helloWorld",
-				"title": "Hello World"
-			}
-		]
+		"languages": [
+            {
+                "id": "ldoc-template",
+                "aliases": ["LDoc Template"],
+                "extensions": [".ltp"],
+                "configuration": "./language-configurations/ltp.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "ldoc-template",
+                "scopeName": "text.html.ldoc",
+                "path": "./syntaxes/ldoc-template.tmLanguage.json",
+                "embeddedLanguages": {
+                    "meta.embedded.block.lua": "lua",
+                    "meta.embedded.line.lua": "lua"
+                }
+            }
+        ]
 	},
 	"scripts": {
 		"vscode:prepublish": "yarn run compile",
@@ -30,7 +53,7 @@
 		"test": "node ./out/test/runTest.js"
 	},
 	"devDependencies": {
-		"@types/vscode": "^1.65.0",
+		"@types/vscode": "^1.64.0",
 		"@types/glob": "^7.2.0",
 		"@types/mocha": "^9.1.0",
 		"@types/node": "14.x",
